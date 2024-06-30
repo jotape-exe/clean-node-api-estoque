@@ -35,7 +35,7 @@ router.get('/:sku', auth, (req, res) => {
   produtoController.buscarPorSku(req, res)
 });
 
-router.put(
+router.patch(
   '/:id',
   [
     auth,

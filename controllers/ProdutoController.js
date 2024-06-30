@@ -1,4 +1,4 @@
-
+import mongoose from 'mongoose';
 import ProdutoDTO from '../http/dto/ProdutoDTO.js';
 import {
   OK,
@@ -80,6 +80,11 @@ class ProdutoController {
     if (quantidade) camposAtualizados.quantidade = quantidade;
 
     try {
+
+      if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+        return res.sendResponse(BAD_REQUEST, 'ID de produto inválido');
+      }
+
       let produto = await this.produtoDAO.findById(req.params.id);
       if (!produto)
         return res.sendResponse(NOT_FOUND, 'Produto não encontrado');
@@ -90,10 +95,11 @@ class ProdutoController {
       );
       res.sendResponse(
         OK,
-        'Solicitação realizada com sucesso',
-        new ProdutoDTO(produto)
+        'Produto atualizado com sucesso',
+        new ProdutoDTO(produto).id
       );
     } catch (err) {
+      console.log("asd");
       console.error(err.message);
       res.sendResponse(INTERNAL_SERVER_ERROR, 'Erro no servidor');
     }
@@ -101,6 +107,11 @@ class ProdutoController {
 
   async apagar(req, res) {
     try {
+
+      if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+        return res.sendResponse(BAD_REQUEST, 'ID de produto inválido');
+      }
+
       const produto = await this.produtoDAO.findById(req.params.id);
       if (!produto)
         return res.sendResponse(NOT_FOUND, 'Produto não encontrado');

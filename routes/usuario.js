@@ -9,7 +9,7 @@ const router = express.Router();
 const usuarioDAO = new UsuarioDAO()
 const controller = new AuthController(usuarioDAO)
 
-// Registrar um novo usuário
+
 router.post(
   '/register',
   [
@@ -22,7 +22,7 @@ router.post(
   }
 );
 
-// Login de usuário
+
 router.post(
   '/login',
   [

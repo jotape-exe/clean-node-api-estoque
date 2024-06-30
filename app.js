@@ -5,19 +5,21 @@ import usuario from './routes/usuario.js';
 import produto from './routes/produto.js';
 import dotenv from 'dotenv';
 import responseHandler from './middleware/utils/responseHandler.js';
+import cors from 'cors'
 import errorHandler from './middleware/errorHandler.js';
 
 dotenv.config();
 const app = express();
-const port = 3333;
+
 
 app.use(express.json());
 app.use(bodyParser.json());
+app.use(cors())
 app.use(responseHandler);
 //app.use(errorHandler);
 
 mongoose
-  .connect('mongodb://localhost:27017/businessdb')
+  .connect(process.env.HOST_URL)
   .then(() => {
     console.log('Conectado ao MongoDB');
   })
@@ -25,8 +27,9 @@ mongoose
     console.error('Erro ao conectar ao MongoDB', err);
   });
 
-app.listen(port, () => {
-  console.log(`Servidor rodando em http://localhost:${port}`);
+
+app.listen(process.env.HOST_PORT, () => {
+  console.log(`Servidor rodando em http://localhost:${process.env.HOST_PORT}`);
 });
 
 app.use('/api/auth', usuario);
