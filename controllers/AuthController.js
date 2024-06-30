@@ -68,7 +68,7 @@ class AuthController {
       }
 
       //TODO
-      const isMatch = bcrypt.compare(senha, usuario.senha);
+      const isMatch = await bcrypt.compare(senha, usuario.senha);
 
       if (!isMatch) {
         return res.sendResponse(BAD_REQUEST, 'Credenciais inválidas');

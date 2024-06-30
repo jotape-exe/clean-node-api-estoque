@@ -6,7 +6,6 @@ import produto from './routes/produto.js';
 import dotenv from 'dotenv';
 import responseHandler from './middleware/utils/responseHandler.js';
 import cors from 'cors'
-import errorHandler from './middleware/errorHandler.js';
 
 dotenv.config();
 const app = express();
@@ -16,7 +15,6 @@ app.use(express.json());
 app.use(bodyParser.json());
 app.use(cors())
 app.use(responseHandler);
-//app.use(errorHandler);
 
 mongoose
   .connect(process.env.HOST_URL)
