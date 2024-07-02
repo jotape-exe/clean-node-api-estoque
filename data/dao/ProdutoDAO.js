@@ -31,7 +31,7 @@ ProdutoDAO.prototype.updateById = async function(id, camposAtualizados) {
 };
 
 ProdutoDAO.prototype.deleteById = async function(id) {
-  const produto = await Produto.findByIdAndRemove(id);
+  const produto = await Produto.findByIdAndDelete(id);
   return produto ? new ProdutoDTO(produto) : null;
 };
 
