@@ -1,10 +1,10 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { validationResult } from 'express-validator';
-import { OK, BAD_REQUEST, INTERNAL_SERVER_ERROR } from '../http/status.js'
+import { OK, BAD_REQUEST, INTERNAL_SERVER_ERROR } from '../http/status.js';
+import mongoose from 'mongoose';
 
 class AuthController {
-
   constructor(usuarioDAO) {
     this.usuarioDAO = usuarioDAO;
   }
@@ -19,9 +19,7 @@ class AuthController {
         errorMessages
       );
     }
-
     const { nome, email, senha } = req.body;
-
     try {
       let usuario = await this.usuarioDAO.findByEmail(email);
       if (usuario) {
@@ -66,9 +64,8 @@ class AuthController {
       if (!usuario) {
         return res.sendResponse(BAD_REQUEST, 'Credenciais inválidas');
       }
-
-      //TODO
-      const isMatch = await bcrypt.compare(senha, usuario.senha);
+  
+      const isMatch = await bcrypt.compare(senha, usuario.senha)
 
       if (!isMatch) {
         return res.sendResponse(BAD_REQUEST, 'Credenciais inválidas');

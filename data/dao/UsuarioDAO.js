@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt';
-import Usuario from '../models/Usuario.js'
+import Usuario from '../models/Usuario.js';
 
 class UsuarioDAO {
   async findByEmail(email) {
