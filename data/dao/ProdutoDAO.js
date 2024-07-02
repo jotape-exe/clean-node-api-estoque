@@ -2,37 +2,37 @@ import ProdutoDTO from '../../http/dto/ProdutoDTO.js';
 import Produto from '../models/Produto.js'
 
 
-class ProdutoDAO {
-  async create(produtoData) {
-    const novoProduto = new Produto(produtoData);
-    const savedProduto = await novoProduto.save();
-    return new ProdutoDTO(savedProduto);
-  }
+function ProdutoDAO() {}
 
-  async findBySKU(sku) {
-    const produto = await Produto.findOne({ sku });
-    return produto ? new ProdutoDTO(produto) : null;
-  }
+ProdutoDAO.prototype.create = async function(produtoData) {
+  const novoProduto = new Produto(produtoData);
+  const savedProduto = await novoProduto.save();
+  return new ProdutoDTO(savedProduto);
+};
 
-  async findById(id) {
-    const produto = await Produto.findById(id);
-    return produto ? new ProdutoDTO(produto) : null;
-  }
+ProdutoDAO.prototype.findBySKU = async function(sku) {
+  const produto = await Produto.findOne({ sku });
+  return produto ? new ProdutoDTO(produto) : null;
+};
 
-  async findAll() {
-    const produtos = await Produto.find();
-    return produtos.map(produto => new ProdutoDTO(produto));
-  }
+ProdutoDAO.prototype.findById = async function(id) {
+  const produto = await Produto.findById(id);
+  return produto ? new ProdutoDTO(produto) : null;
+};
 
-  async updateById(id, camposAtualizados) {
-    const produto = await Produto.findByIdAndUpdate(id, { $set: camposAtualizados }, { new: true });
-    return produto ? new ProdutoDTO(produto) : null;
-  }
+ProdutoDAO.prototype.findAll = async function() {
+  const produtos = await Produto.find();
+  return produtos.map(produto => new ProdutoDTO(produto));
+};
 
-  async deleteById(id) {
-    const produto = await Produto.findByIdAndRemove(id);
-    return produto ? new ProdutoDTO(produto) : null;
-  }
-}
+ProdutoDAO.prototype.updateById = async function(id, camposAtualizados) {
+  const produto = await Produto.findByIdAndUpdate(id, { $set: camposAtualizados }, { new: true });
+  return produto ? new ProdutoDTO(produto) : null;
+};
+
+ProdutoDAO.prototype.deleteById = async function(id) {
+  const produto = await Produto.findByIdAndRemove(id);
+  return produto ? new ProdutoDTO(produto) : null;
+};
 
 export default ProdutoDAO;

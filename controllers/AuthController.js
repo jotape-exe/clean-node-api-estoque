@@ -5,8 +5,8 @@ import { OK, BAD_REQUEST, INTERNAL_SERVER_ERROR } from '../http/status.js';
 import mongoose from 'mongoose';
 
 class AuthController {
-  constructor(usuarioDAO) {
-    this.usuarioDAO = usuarioDAO;
+  constructor(UsuarioDAOImpl) {
+    this.usuarioDAO = UsuarioDAOImpl;
   }
 
   async register(req, res) {

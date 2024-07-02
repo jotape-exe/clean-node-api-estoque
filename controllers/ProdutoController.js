@@ -9,8 +9,8 @@ import {
 } from '../http/status.js';
 
 class ProdutoController {
-  constructor(produtoDAO) {
-    this.produtoDAO = produtoDAO;
+  constructor(ProdutoDAOImpl) {
+    this.produtoDAO = ProdutoDAOImpl;
   }
 
   async inserir(req, res) {
@@ -99,7 +99,6 @@ class ProdutoController {
         new ProdutoDTO(produto).id
       );
     } catch (err) {
-      console.log("asd");
       console.error(err.message);
       res.sendResponse(INTERNAL_SERVER_ERROR, 'Erro no servidor');
     }

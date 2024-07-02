@@ -1,11 +1,11 @@
 import express from 'express';
 import { check, validationResult } from 'express-validator';
 import auth from '../middleware/auth/auth.js';
-import ProdutoDAO from '../data/dao/ProdutoDAO.js';
 import ProdutoController from '../controllers/ProdutoController.js';
+import ProdutoDAOImpl from '../data/dao/impl/ProdutoDAOImpl.js';
 
 const router = express.Router();
-const produtoDAO = new ProdutoDAO()
+const produtoDAO = new ProdutoDAOImpl()
 const produtoController = new ProdutoController(produtoDAO);
 
 

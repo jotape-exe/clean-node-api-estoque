@@ -1,10 +1,10 @@
 import express from 'express';
 import { check } from 'express-validator';
 import AuthController from '../controllers/AuthController.js';
-import UsuarioDAO from '../data/dao/UsuarioDAO.js';
+import UsuarioDAOImpl from '../data/dao/impl/UsuarioDAOImpl.js';
 
 const router = express.Router();
-const usuarioDAO = new UsuarioDAO()
+const usuarioDAO = new UsuarioDAOImpl()
 const controller = new AuthController(usuarioDAO)
 
 
