@@ -18,7 +18,7 @@ npm install
 ```
 
 
-#### Configure as variaveis de ambiente no arquivo `.env` conforme o expemplo em `env.example`:
+#### Configure as variaveis de ambiente no arquivo `.env` conforme o exemplo em `env.example`:
 
 
 - JWT_SECRET= ver: [GERAR O JWT SECRET](https://dev.to/tkirwa/generate-a-random-jwt-secret-key-39j4)
